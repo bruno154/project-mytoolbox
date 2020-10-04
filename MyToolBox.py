@@ -1,6 +1,7 @@
 import glob
 import math
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from time import strftime
 
@@ -16,14 +17,14 @@ class DataDescription:
 
     def my_describe():
         describe = pd.DataFrame({'missingPerc': self.dataframe.isna().mean(),
-                                  'uniques': self.dataframe.nunique(),
-                                  '%uniquePerc': round((self.dataframe.nunique()/train.shape[0])*100,2),
-                                  'data_types': self.dataframe.dtypes,
-                                  'mean': round(self.dataframe.mean(),2),
-                                  'median': round(self.dataframe.median(),2),
-                                  'std': round(self.dataframe.std(),2),
-                                  'min': round(self.dataframe.min(),2),
-                                  'max': round(self.dataframe.max(),2)})
+                                 'uniques': self.dataframe.nunique(),
+                                 '%uniquePerc': round((self.dataframe.nunique()/train.shape[0])*100,2),
+                                 'data_types': self.dataframe.dtypes,
+                                 'mean': round(self.dataframe.mean(),2),
+                                 'median': round(self.dataframe.median(),2),
+                                 'std': round(self.dataframe.std(),2),
+                                 'min': round(self.dataframe.min(),2),
+                                 'max': round(self.dataframe.max(),2)})
         return describe
 
 
@@ -85,8 +86,7 @@ class CleanData:
 
     def df_filter(self, cond):
 
-        """
-        Filtra df conforme determinada condição.
+        """ Filtra df conforme determinada condição.
 
         :df:   Dataframe
         :cond: Condição no qual haverá o filtro.
@@ -96,7 +96,56 @@ class CleanData:
 
 
 class EDA:
-    pass
+
+    def __init__(self, dataframe: pd.DataFrame):
+        self.dataframe = dataframe
+
+    def multi_histograms(self, variables: list) -> None:
+
+        """
+        Function to check for outliers visually through a boxplot
+
+        data: DataFrame
+
+        variable: list of numerical variables
+        """
+
+        # set of initial plot posistion
+        n = 1
+
+        plt.figure(figsize=(18, 10))
+        for column in self.dataframe[variables].columns:
+            plt.subplot(3, 3, n)
+            _ = sns.histplot(x=self.dataframe[column], bins=50)
+            n += 1
+
+        plt.subplots_adjust(hspace=0.3)
+
+        plt.show()
+
+    def multi_boxplots(self, variables: list) -> None:
+
+        """
+        Function to check for outliers visually through a boxplot
+
+        data: DataFrame
+
+        variable: list of numerical variables
+        """
+
+        # set of initial plot posistion
+        n = 1
+
+        plt.figure(figsize=(18, 10))
+        for column in self.dataframe[variables].columns:
+            plt.subplot(3, 3, n)
+            _ = sns.boxplot(x=column, data=self.dataframe)
+            n += 1
+
+        plt.subplots_adjust(hspace=0.3)
+
+        plt.show()
+
 
 
 class DataPreparation:
