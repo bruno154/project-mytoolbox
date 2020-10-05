@@ -156,8 +156,23 @@ class ModelSelection:
     pass
 
 
-class ModelEvaluantion:
-    pass
+class ModelEvaluation:
+
+    def __init__(self, model, Xvalid, yvalid):
+        self.model = model
+        self.Xvalid = Xvalid
+        self.yvalid = yvalid
+
+    def confusion_matrix():
+        pass
+
+    def discrimination_threshold():
+        pass
+
+    def roc_curve(): #exemplaria
+        pass
+
+    def 
 
 class StatsCalculations:
 
