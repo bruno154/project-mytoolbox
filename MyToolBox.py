@@ -18,13 +18,13 @@ class DataDescription:
     def my_describe():
         describe = pd.DataFrame({'missingPerc': self.dataframe.isna().mean(),
                                  'uniques': self.dataframe.nunique(),
-                                 '%uniquePerc': round((self.dataframe.nunique()/train.shape[0])*100,2),
+                                 '%uniquePerc': (self.dataframe.nunique()/train.shape[0])*100,
                                  'data_types': self.dataframe.dtypes,
-                                 'mean': round(self.dataframe.mean(),2),
-                                 'median': round(self.dataframe.median(),2),
-                                 'std': round(self.dataframe.std(),2),
-                                 'min': round(self.dataframe.min(),2),
-                                 'max': round(self.dataframe.max(),2)})
+                                 'mean': self.dataframe.mean(),
+                                 'median': self.dataframe.median(),
+                                 'std': self.dataframe.std(),
+                                 'min': self.dataframe.min(),
+                                 'max': self.dataframe.max()})
         return describe
 
 
